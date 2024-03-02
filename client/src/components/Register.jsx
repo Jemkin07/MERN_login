@@ -18,8 +18,8 @@ const SignupForm = () => {
             navigate('/login')
         }
         else{
-            alert("sucessfully logged in ")
-            navigate("/home")
+            alert("sucessfully registered ")
+            navigate("/login")
         }
       })
       .catch(err=>console.log(err))

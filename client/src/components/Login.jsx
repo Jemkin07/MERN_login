@@ -13,7 +13,7 @@ const LoginForm = () => {
     axios.post("http://localhost:4000/login", {email, password})
     .then(result=>{
         console.log(result)
-        if(result.data === 'success'){
+        if(result.data === 'Success'){
             console.log("login successfull")
             alert("successfully logged in")
             navigate("/home")

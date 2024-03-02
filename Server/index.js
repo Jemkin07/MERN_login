@@ -13,6 +13,7 @@ mongoose.connect("mongodb+srv://gggonext05:12345@cluster0.w0iep9u.mongodb.net/")
 .catch(err=>(console.error(err)));
 
 app.post("/register", (req, res)=>{
+    const {email, password} = req.body;
     User.findOne({email:email})
     .then(user=>{
         if(user){
@@ -26,16 +27,18 @@ app.post("/register", (req, res)=>{
     })  
 })
 
-app.post("/login", (req, res)=>{
+app.post("/login",async (req, res)=>{
     const {email, password}= req.body
     User.findOne({email:email})
-    .then(user=>{
+    .then( async user=>{
         if(user){
-            if(user.password === password){
-                res.json("success")
+            const isMatch = await user.comparePassword(password);
+
+             if (!isMatch) {
+                res.json("invalid password")
             }
             else{
-                res.json("invalid password")
+                res.json("Success")
             }
         }
         else{
